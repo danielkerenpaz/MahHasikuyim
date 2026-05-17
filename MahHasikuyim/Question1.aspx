@@ -4,7 +4,7 @@
 
 <h1>מה הסיכוי שיפגע בך ברק ? (באחוזים)</h1>
 
-<img src="Images/lightning.png" />
+<img src="Images/lightning.png.jpg" />
 
 <br /><br />
 

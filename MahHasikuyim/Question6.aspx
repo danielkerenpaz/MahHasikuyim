@@ -4,7 +4,7 @@
 
 <h1>מה הסיכוי להיוולד בעל מטר 80 במדינת ישראל ? (באחוזים)</h1>
 
-<img src="Images/height.png" />
+<img src="Images/height.png.jpg" />
 
 <br /><br />
 

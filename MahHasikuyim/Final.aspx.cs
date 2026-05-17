@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System;
+using System.Data;
 
 namespace MahHasikuyim
 {
@@ -32,4 +34,6 @@ namespace MahHasikuyim
 
             gvResults.DataSource = dt;
             gvResults.DataBind();
-      
+        }
+    }
+}

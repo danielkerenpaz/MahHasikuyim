@@ -4,7 +4,7 @@
 
 <h1>מה הסיכוי לזכות בלוטו ? (באחוזים)</h1>
 
-<img src="Images/lotto.png" />
+<img src="Images/lotto.png.jpg" />
 
 <br /><br />
 

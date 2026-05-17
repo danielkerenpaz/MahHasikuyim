@@ -4,7 +4,7 @@
 
 <h1>מה הסיכוי ללדת תאומים ? (באחוזים)</h1>
 
-<img src="Images/twins.png" />
+<img src="Images/twins.png.jpg" />
 
 <br /><br />
 

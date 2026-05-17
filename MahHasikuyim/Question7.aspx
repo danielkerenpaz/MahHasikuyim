@@ -4,7 +4,7 @@
 
 <h1>מה הסיכוי שתזכה בהגרלה שבה יש 1000 משתתפים ושלושה זוכים ? (באחוזים)</h1>
 
-<img src="Images/winners.png" />
+<img src="Images/winners.png.jpg" />
 
 <br /><br />
 

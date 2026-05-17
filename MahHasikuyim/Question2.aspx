@@ -4,7 +4,7 @@
 
 <h1>מה הסיכוי שתשרוד התרסקות מטוס ? (באחוזים)</h1>
 
-<img src="Images/plane.png" />
+<img src="Images/plane.png.jpg" />
 
 <br /><br />
 

@@ -4,7 +4,7 @@
 
 <h1>מה הסיכוי להיוולד עם שתי צבעים שונים בכל עין ? (באחוזים)</h1>
 
-<img src="Images/eyes.png" />
+<img src="Images/eyes.png.jpg" />
 
 <br /><br />
 

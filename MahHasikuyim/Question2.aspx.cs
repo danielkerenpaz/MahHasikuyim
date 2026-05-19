@@ -4,18 +4,18 @@ namespace MahHasikuyim
 {
     public partial class Question2 : System.Web.UI.Page
     {
+        double realAnswer = 5;
+
         protected void btnHint_Click(object sender, EventArgs e)
         {
-            lblHint.Text = "התשובה לא חייבת להיות שלמה והיא גדולה מ־1%";
+            lblHint.Text = "התשובה היא גדולה מ־1%";
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             double userAnswer = Convert.ToDouble(txtAnswer.Text);
 
-            double realAnswer = 5;
-
-            int score = 100 - (int)Math.Abs(realAnswer - userAnswer);
+            int score = 100 - (int)(Math.Abs(realAnswer - userAnswer) * 10);
 
             if (score < 0)
             {

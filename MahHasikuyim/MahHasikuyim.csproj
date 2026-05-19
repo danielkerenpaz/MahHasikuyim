@@ -85,6 +85,12 @@
     <Content Include="Question7.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Result1.aspx" />
+    <Content Include="Result2.aspx" />
+    <Content Include="Result3.aspx" />
+    <Content Include="Result4.aspx" />
+    <Content Include="Result5.aspx" />
+    <Content Include="Result6.aspx" />
+    <Content Include="Result7.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
@@ -162,6 +168,48 @@
     </Compile>
     <Compile Include="Result1.aspx.designer.cs">
       <DependentUpon>Result1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Result2.aspx.cs">
+      <DependentUpon>Result2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Result2.aspx.designer.cs">
+      <DependentUpon>Result2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Result3.aspx.cs">
+      <DependentUpon>Result3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Result3.aspx.designer.cs">
+      <DependentUpon>Result3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Result4.aspx.cs">
+      <DependentUpon>Result4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Result4.aspx.designer.cs">
+      <DependentUpon>Result4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Result5.aspx.cs">
+      <DependentUpon>Result5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Result5.aspx.designer.cs">
+      <DependentUpon>Result5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Result6.aspx.cs">
+      <DependentUpon>Result6.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Result6.aspx.designer.cs">
+      <DependentUpon>Result6.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Result7.aspx.cs">
+      <DependentUpon>Result7.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Result7.aspx.designer.cs">
+      <DependentUpon>Result7.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

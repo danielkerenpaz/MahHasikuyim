@@ -1,75 +1,159 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="MahHasikuyim.Site" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="he" dir="rtl">
 <head runat="server">
+    <meta charset="utf-8" />
     <title>מה הסיכויים</title>
 
     <style>
         body {
             margin: 0;
-            font-family: Arial;
-            background-color: #f2f2f2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
             direction: rtl;
             text-align: center;
+            color: #333;
         }
 
+        /* עיצוב כותרת האתר */
         .header {
-            background-color: #222;
-            color: white;
-            padding: 20px;
-            font-size: 35px;
+            background-color: #1e1e24;
+            color: #ffffff;
+            padding: 25px 20px;
+            font-size: 38px;
             font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
+        /* סרגל ניווט מקצועי */
+        .navbar {
+            background-color: #2a2a35;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #dddddd;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #4caf50;
+        }
+
+        .user-greeting {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 15px;
+            background-color: #3b3b4f;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .logout-btn {
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #c62828;
+            color: white;
+        }
+
+        /* אזור התוכן המרכזי של הדפים */
         .container {
-            margin-top: 30px;
+            margin-top: 40px;
+            padding: 0 20px;
+            margin-bottom: 50px;
         }
 
+        /* מחלקות העיצוב הגלובליות שמשמשות את כל השאלות באתר */
         .greenBtn {
-            background-color: green;
+            background-color: #2e7d32;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: background-color 0.2s;
         }
-           .blueBtn {
-            background-color: royalblue;
+        .greenBtn:hover { background-color: #1b5e20; }
+
+        .blueBtn {
+            background-color: #1565c0;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: background-color 0.2s;
         }
+        .blueBtn:hover { background-color: #0d47a1; }
 
         .yellowBtn {
-            background-color: gold;
-            color: black;
+            background-color: #fbc02d;
+            color: #212121;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: background-color 0.2s;
         }
+        .yellowBtn:hover { background-color: #f57f17; }
 
         .answerBox {
-            width: 250px;
-            padding: 10px;
+            width: 260px;
+            padding: 12px;
             font-size: 18px;
-            border-radius: 10px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.2s;
         }
+        .answerBox:focus { border-color: #1565c0; }
 
         img {
-            width: 400px;
-            border-radius: 20px;
+            width: 420px;
+            max-width: 90%;
+            border-radius: 15px;
             margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
         .result {
-            color: red;
+            color: #d32f2f;
             font-size: 45px;
             font-weight: bold;
         }
@@ -83,7 +167,33 @@
 <form id="form1" runat="server">
 
     <div class="header">
-        מה הסיכויים
+        מה הסיכויים? 🎲
+    </div>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="About.aspx" class="nav-link">אודות המפתח</a>
+            
+            <asp:HyperLink ID="lnkLeaderboard" runat="server" NavigateUrl="~/Final.aspx" CssClass="nav-link" Visible="false">טבלת מובילים</asp:HyperLink>
+            
+            <% if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"]) { %>
+                <a href="Admin.aspx" class="nav-link" style="color: #0ea5e9; font-weight: bold;">פאנל ניהול</a>
+            <% } %>
+        </div>
+        
+        <div class="nav-links">
+            <asp:PlaceHolder ID="phAnonymous" runat="server">
+                <a href="Login.aspx" class="nav-link">התחברות</a>
+                <a href="Register.aspx" class="nav-link">הרשמה מהירה</a>
+            </asp:PlaceHolder>
+
+            <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
+                <span class="user-greeting">
+                    שלום, <asp:Label ID="lblUserGreeting" runat="server"></asp:Label>
+                </span>
+                <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click" CssClass="logout-btn" CausesValidation="false">התנתק</asp:LinkButton>
+            </asp:PlaceHolder>
+        </div>
     </div>
 
     <div class="container">

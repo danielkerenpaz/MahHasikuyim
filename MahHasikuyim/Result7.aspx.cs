@@ -6,6 +6,13 @@ namespace MahHasikuyim
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // הגנה מפני גישה ישירה לדף ללא נתונים בסשן
+            if (Session["Answer7"] == null || Session["Score7"] == null)
+            {
+                Response.Redirect("Question7.aspx");
+                return;
+            }
+
             lblAnswer.Text = Session["Answer7"].ToString();
             lblScore.Text = Session["Score7"].ToString();
         }

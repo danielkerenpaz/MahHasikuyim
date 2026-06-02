@@ -1,24 +1,25 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Result6.aspx.cs" Inherits="MahHasikuyim.Result6" %>
+﻿<%@ Page Title="תוצאה 6" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Result6.aspx.cs" Inherits="MahHasikuyim.Result6" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-<div class="result">
-    האחוז הנכון הוא:
-    <br />
+    <div style="background-color: white; padding: 30px; display: inline-block; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px;">
+        <div class="result">
+            האחוז הנכון הוא:
+            <br />
+            <asp:Label ID="lblAnswer" runat="server"></asp:Label>%
+        </div>
 
-    <asp:Label ID="lblAnswer" runat="server"></asp:Label>%
-</div>
+        <br />
 
-<br /><br />
+        <h2>
+            קיבלת:
+            <asp:Label ID="lblScore" runat="server" ForeColor="Green"></asp:Label>
+            נקודות מתוך 100
+        </h2>
 
-<h1>
-    קיבלת:
-    <asp:Label ID="lblScore" runat="server"></asp:Label>
-    נקודות מתוך 100
-</h1>
+        <br /><br />
 
-<br /><br />
-
-<asp:Button ID="btnNext" runat="server" Text="← עמוד הבא" CssClass="yellowBtn" OnClick="btnNext_Click" />
+        <asp:Button ID="btnNext" runat="server" Text="← עמוד הבא" CssClass="yellowBtn" OnClick="btnNext_Click" />
+    </div>
 
 </asp:Content>

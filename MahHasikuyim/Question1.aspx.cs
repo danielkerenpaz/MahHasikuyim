@@ -4,28 +4,70 @@ namespace MahHasikuyim
 {
     public partial class Question1 : System.Web.UI.Page
     {
+        // התשובה הנכונה לשאלה 1
         double realAnswer = 0.0065;
 
-        protected void btnHint_Click(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            lblHint.Text = "התשובה לא חייבת להיות שלמה והיא לא בהכרח גדולה מ-1%";
+            // אבטחת הדף: אם משתמש לא מחובר, הוא לא יכול לשחק ומועבר לדף כניסה
+            if (Session["UserEmail"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            double userAnswer = Convert.ToDouble(txtAnswer.Text);
+            double userAnswer;
 
-            int score = 100 - (int)(Math.Abs(realAnswer - userAnswer) * 10);
-
-            if (score < 0)
+            // שימוש ב-TryParse למניעת קריסות במקרה של קלט שאינו מספר
+            if (double.TryParse(txtAnswer.Text, out userAnswer))
             {
-                score = 0;
+                // חישוב הניקוד לפי נוסחת אקסטרים החדשה והקשוחה (חוק ה-פי 2)
+                int score = GetStrictScore(userAnswer, realAnswer);
+
+                // שמירת נתונים ב-Session למעבר לדף התוצאה
+                Session["Answer1"] = realAnswer;
+                Session["Score1"] = score;
+
+                // עדכון הניקוד המצטבר של המשחק כולו
+                if (Session["TotalScore"] == null)
+                    Session["TotalScore"] = score;
+                else
+                    Session["TotalScore"] = (int)Session["TotalScore"] + score;
+
+                Response.Redirect("Result1.aspx");
+            }
+        }
+
+        /// <summary>
+        /// אלגוריתם חכם לחישוב ניקוד ברמת קושי גבוהה
+        /// </summary>
+        private int GetStrictScore(double userGuess, double correctAnswer)
+        {
+            // הגנה מפני ערכי אפס או שליליים כדי למנוע שגיאות חלוקה באפס
+            if (userGuess <= 0 || correctAnswer <= 0)
+            {
+                return (userGuess == correctAnswer) ? 100 : 0;
             }
 
-            Session["Answer1"] = realAnswer;
-            Session["Score1"] = score;
+            // חישוב פי כמה השחקן רחוק מהתשובה (תמיד מספר שגדול או שווה ל-1)
+            double ratio = Math.Max(userGuess / correctAnswer, correctAnswer / userGuess);
 
-            Response.Redirect("Result1.aspx");
+            // חוק ה-פי 2: אם הניחוש גדול פי 2 ומעלה, או קטן מחצי -> פוסלים מיד ל-0 נקודות!
+            if (ratio >= 2.0)
+            {
+                return 0;
+            }
+
+            // נוסחת עונש ריבועית על בסיס היחס:
+            // ככל שהשחקן מתרחק מ-1, הקנס גדל בריבוע עד שהוא מגיע ל-100 נקודות קנס בנקודת ה-פי 2
+            double penalty = Math.Pow(ratio - 1, 2) * 100;
+
+            // חישוב הציון הסופי (ומניעת ציונים שליליים מתחת ל-0)
+            int finalScore = (int)Math.Max(0, 100 - penalty);
+
+            return finalScore;
         }
     }
 }

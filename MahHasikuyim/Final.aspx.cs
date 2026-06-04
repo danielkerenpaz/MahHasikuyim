@@ -108,3 +108,100 @@ namespace MahHasikuyim
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =========================================================================
+//                  🎯 מדריך שליפה מהירה למבחן - פרויקט מה הסיכויים 🎯
+// =========================================================================
+//
+// 📄 1. הוספת עמוד חדש באתר (Web Form)
+// -------------------------------------------------------------------------
+// 1. בצד ימין, בחלון ה-Solution Explorer, קליק ימני על שם הפרויקט (MahHasikuyim).
+// 2. עומדים על Add ואז בוחרים ב-New Item...
+// 3. בחלון שנפתח בוחרים ב-Web Form (או Web Form with Master Page אם יש עיצוב אחיד).
+// 4. למטה ב-Name משנים את השם למה שהמורה ביקשה (למשל: Test.aspx) ולוחצים על Add.
+//
+// 📊 2. שינויים בטבלה (רוחב, אורך, צבע, מסגרת)
+// -------------------------------------------------------------------------
+// [שינוי רוחב ואורך - Width & Height]
+// * בטבלת HTML רגילה:  <table style="width: 500px; height: 300px;">
+// * ב-GridView של ASP:  <asp:GridView ID="gvUsers" runat="server" Width="100%" Height="200px">
+//
+// [שינוי צבע רקע - Background Color]
+// * בטבלת HTML רגילה:  <table style="background-color: LightBlue;">
+// * ב-GridView של ASP:  <asp:GridView ID="gvUsers" runat="server" BackColor="#F0F0F0">
+//
+// [שינוי צבע ועובי הגבול / מסגרת - Border]
+// * בטבלת HTML רגילה:  <table style="border: 2px solid Red;">
+// * ב-GridView של ASP:  <asp:GridView ID="gvUsers" runat="server" BorderWidth="3px" BorderColor="Blue">
+//
+// 🖼️ 3. הוספת תמונה, סרטון וקישורים ב-HTML
+// -------------------------------------------------------------------------
+// [הוספת תמונה]
+// <img src="Images/myPhoto.png" width="200" height="150" alt="תיאור התמונה" />
+//
+// [הוספת סרטון מיוטיוב - הכי נפוץ במבחן]
+// כנס ליוטיוב -> שתף -> הטמעה (Embed) -> תעתיק את ה-iframe ותדביק:
+// <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+//
+// [הוספת סרטון מקומי מהמחשב]
+// <video width="400" controls><source src="Videos/myVideo.mp4" type="video/mp4"></video>
+//
+// [הוספת קישור רגיל]
+// <a href="Default.aspx">לחץ כאן לחזרה לעמוד הבית</a>
+// <a href="https://www.google.com" target="_blank">פתח את גוגל בטאב חדש</a>
+//
+// [הוספת קישור בתוך תמונה (תמונה לחיצה)]
+// <a href="Question1.aspx"><img src="Images/play.png" width="100" height="100" /></a>
+//
+// 👑 4. שינוי צבע של כותרת
+// -------------------------------------------------------------------------
+// משתמשים במאפיין style בתגיות הכותרת h1 עד h6:
+// <h1 style="color: DarkGreen;">ברוכים הבאים למשחק!</h1>
+// <h2 style="color: #FF5733;">כותרת משנית בצבע כתום</h2>
+//
+// 🎯 5. דברים מפתיעים שהמורה יכולה לבקש (רשימת הצלה)
+// -------------------------------------------------------------------------
+// * שינוי טקסט של כפתור: חפש את ה-Button ב-HTML ושנה את ה-Text שלו: Text="לחץ כאן"
+//
+// * שינוי צבע רקע של כל העמוד: חפש את תגית ה-<body> ב-HTML ותוסיף לה צבע:
+//   <body style="background-color: LightGray;">
+//
+// * מעבר עמוד אוטומטי מתוך קוד C#: באירוע לחיצה על כפתור מוסיפים את הפקודה:
+//   Response.Redirect("TargetPage.aspx");
+//
+// * מיון השחקנים לפי ניקוד ב-SQL (גבוה לנמוך / נמוך לגבוה):
+//   מוסיפים ORDER BY בסוף מחרוזת ה-query בתוך קוד ה-C#.
+//   - מהגבוה לנמוך (DESC): string query = "SELECT * FROM Users ORDER BY UserScore DESC";
+//   - מהנמוך לגבוה (ASC):  string query = "SELECT * FROM Users ORDER BY UserScore ASC";
+//
+// * חוק ברזל: אם עשית שינוי עיצובי והוא לא מתעדכן על המסך, תלחץ על Ctrl + F5 בדפדפן!
+// =========================================================================

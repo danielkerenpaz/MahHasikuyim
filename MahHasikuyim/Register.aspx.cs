@@ -28,8 +28,8 @@ namespace MahHasikuyim
                 {
                     conn.Open();
 
-                    // 1. בדיקה האם המשתמש כבר קיים במערכת לפי האימייל שלו
-                    string checkQuery = "SELECT COUNT(*) FROM tblUsers WHERE UserEmail = @email";
+                    // 1. בדיקה האם המשתמש כבר קיים במערכת לפי האימייל שלו (שונה ל-Users)
+                    string checkQuery = "SELECT COUNT(*) FROM Users WHERE UserEmail = @email";
                     using (OleDbCommand checkCmd = new OleDbCommand(checkQuery, conn))
                     {
                         checkCmd.Parameters.AddWithValue("@email", email);
@@ -42,14 +42,13 @@ namespace MahHasikuyim
                         }
                     }
 
-                    // 2. הכנסת המשתמש החדש עם ניקוד התחלתי 0
-                    // העמודות תואמות בדיוק לשליפה שביצענו בדף טבלת המובילים (Final.aspx)
-                    string insertQuery = "INSERT INTO tblUsers (UserEmail, FullName, UserPassword, UserScore) VALUES (@email, @fullName, @password, 0)";
+                    // 2. הכנסת המשתמש החדש (שונה ל-Users)
+                    string insertQuery = "INSERT INTO Users (UserEmail, FullName, UserPassword, UserScore) VALUES (@email, @fullName, @password, 0)";
                     using (OleDbCommand insertCmd = new OleDbCommand(insertQuery, conn))
                     {
                         insertCmd.Parameters.AddWithValue("@email", email);
                         insertCmd.Parameters.AddWithValue("@fullName", fullName);
-                        insertCmd.Parameters.AddWithValue("@password", password); // בהמשך מומלץ להצפין, כרגע פשוט וישיר לפרויקט
+                        insertCmd.Parameters.AddWithValue("@password", password);
 
                         insertCmd.ExecuteNonQuery();
                     }
@@ -57,7 +56,7 @@ namespace MahHasikuyim
 
                 // 3. שמירת הנתונים ב-Session כדי שהאתר יזהה שהמשתמש מחובר
                 Session["UserEmail"] = email;
-                Session["Email"] = email; // תאימות קוד קודמת ליתר ביטחון
+                Session["Email"] = email;
                 Session["FullName"] = fullName;
 
                 // איפוס ציונים קודמים למקרה שהדפדפן שמר סשן ישן
@@ -72,12 +71,8 @@ namespace MahHasikuyim
             }
             catch (Exception ex)
             {
-                // במקרה שמסד הנתונים עדיין לא הוקם בתיקייה, נשתמש ב-Session כרשת ביטחון כדי שהפרויקט יעבוד חלק
-                Session["UserEmail"] = email;
-                Session["Email"] = email;
-                Session["FullName"] = fullName;
-
-                Response.Redirect("Question1.aspx");
+                // מציג את השגיאה האמיתית על המסך במקרה שמשהו חסר
+                lblMessage.Text = "שגיאת מסד נתונים: " + ex.Message;
             }
         }
     }

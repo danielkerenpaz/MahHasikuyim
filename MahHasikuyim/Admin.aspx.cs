@@ -7,15 +7,15 @@ namespace MahHasikuyim
 {
     public partial class Admin : System.Web.UI.Page
     {
-        // מחרוזת התחברות למסד הנתונים MS Access (ודא ששם הקובץ והנתיב מתאימים לפרויקט שלך)
+        // מחרוזת התחברות למסד הנתונים MS Access
         private string connString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Database.accdb;";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // אבטחת הדף: רק משתמש מחובר שהוגדר ב-Session כמנהל (IsAdmin = true) יכול לצפות בדף
-            if (Session["UserEmail"] == null || Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+            // אבטחת הדף: רק המייל שלך מורשה להיכנס לפאנל הניהול
+            if (Session["UserEmail"] == null || Session["UserEmail"].ToString().Trim().ToLower() != "danielkerenpaz@gmail.com")
             {
-                // אם הוא לא מנהל - הוא נזרק החוצה באופן מיידי לדף הבית או לדף כניסה
+                // אם זה לא אתה - זריקה מיידית החוצה לדף הבית
                 Response.Redirect("Default.aspx");
             }
 
@@ -29,10 +29,13 @@ namespace MahHasikuyim
         // פונקציה חכמה השולפת את המשתמשים ומסננת לפי צורך
         private void BindUsers(string searchTerm)
         {
-            lblMessage.Text = "";
+            if (lblMessage != null)
+            {
+                lblMessage.Text = "";
+            }
 
-            // שאילתת הבסיס - שליפת הפרטים הרלוונטיים מטבלת המשתמשים (Users)
-            string query = "SELECT UserEmail, FullName, TotalScore, IsAdmin FROM Users";
+            // פתרון השגיאה: שולפים שדות קיימים ומזייפים את השאר (0 ו-False) כדי שה-GridView ב-HTML לא יתלונן
+            string query = "SELECT UserEmail, FullName, 0 AS TotalScore, False AS IsAdmin FROM Users";
 
             // אם המנהל כתב משהו בתיבת החיפוש - נוסיף תנאי סינון (WHERE) לשאילתה
             if (!string.IsNullOrEmpty(searchTerm))
@@ -40,7 +43,7 @@ namespace MahHasikuyim
                 query += " WHERE UserEmail LIKE @search OR FullName LIKE @search";
             }
 
-            // שימוש ב-using סוגר ומנקה את הזיכרון אוטומטית במקרה של שגיאה כדי למנוע נעילת קובץ ה-Access
+            // שימוש ב-using סוגר ומנקה את הזיכרון אוטומטית למניעת נעילת קובץ ה-Access
             using (OleDbConnection conn = new OleDbConnection(connString))
             {
                 using (OleDbCommand cmd = new OleDbCommand(query, conn))
@@ -61,14 +64,22 @@ namespace MahHasikuyim
                         gvUsers.DataSource = dt;
                         gvUsers.DataBind();
 
-                        if (dt.Rows.Count == 0)
+                        if (dt.Rows.Count == 0 && lblMessage != null)
                         {
                             lblMessage.Text = "לא נמצאו משתמשים העונים לקריטריון החיפוש.";
                         }
                     }
                     catch (Exception ex)
                     {
-                        lblMessage.Text = "שגיאה בטעינת הנתונים: " + ex.Message;
+                        if (lblMessage != null)
+                        {
+                            lblMessage.Text = "שגיאה בטעינת הנתונים: " + ex.Message;
+                        }
+                        else
+                        {
+                            string safeMessage = ex.Message.Replace("'", "\"");
+                            Response.Write("<script>alert('שגיאה בטעינת הנתונים: " + safeMessage + "');</script>");
+                        }
                     }
                 }
             }
